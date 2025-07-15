@@ -6,7 +6,9 @@
   <title>Fotogalerie – Steffen Veltrup</title>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
   <style>
-    * { margin: 0; padding: 0; box-sizing: border-box; }
+    * {
+      margin: 0; padding: 0; box-sizing: border-box;
+    }
     body {
       font-family: 'Inter', sans-serif;
       background: #fff;
@@ -22,13 +24,13 @@
       padding-bottom: 80px;
     }
     .container {
-      max-width: 960px;
+      max-width: 1200px;
       margin: auto;
       padding: 20px;
       text-align: center;
     }
     h1 {
-      font-size: 24px;
+      font-size: 28px;
       font-weight: 600;
       margin-bottom: 20px;
     }
@@ -53,15 +55,15 @@
     }
     .gallery {
       display: none;
-      grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
-      gap: 12px;
+      grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+      gap: 16px;
     }
     .gallery.active {
       display: grid;
     }
     .gallery img {
       width: 100%;
-      height: 160px;
+      aspect-ratio: 4/3;
       border-radius: 12px;
       box-shadow: 0 4px 8px rgba(0,0,0,0.1);
       transition: transform 0.3s ease;
@@ -77,26 +79,25 @@
       color: #777;
     }
 
-    /* Lightbox Styles */
+    /* Lightbox */
     .lightbox {
       position: fixed;
       top: 0; left: 0;
-      width: 100vw;
-      height: 100vh;
+      width: 100vw; height: 100vh;
       background: rgba(0,0,0,0.9);
-      display: flex;
+      display: none;
       justify-content: center;
       align-items: center;
       z-index: 1000;
-      display: none;
-    }
-    .lightbox img {
-      max-width: 90%;
-      max-height: 90%;
-      border-radius: 12px;
+      padding: 20px;
     }
     .lightbox.active {
       display: flex;
+    }
+    .lightbox img {
+      max-width: 100%;
+      max-height: 100%;
+      border-radius: 12px;
     }
     .lightbox-controls {
       position: absolute;
@@ -104,18 +105,17 @@
       width: 100%;
       display: flex;
       justify-content: space-between;
-      padding: 0 20px;
       transform: translateY(-50%);
+      padding: 0 40px;
     }
     .lightbox-button {
       background: rgba(255,255,255,0.2);
       border: none;
       color: white;
-      font-size: 2rem;
+      font-size: 2.5rem;
       padding: 10px 20px;
       cursor: pointer;
       border-radius: 8px;
-      transition: background 0.3s;
     }
     .lightbox-button:hover {
       background: rgba(255,255,255,0.4);
@@ -124,11 +124,27 @@
       position: absolute;
       top: 20px;
       right: 30px;
-      font-size: 2rem;
+      font-size: 2.5rem;
       color: white;
-      cursor: pointer;
       background: none;
       border: none;
+      cursor: pointer;
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      h1 {
+        font-size: 22px;
+      }
+      .lightbox-controls {
+        padding: 0 20px;
+      }
+    }
+    @media (min-width: 1440px) {
+      .gallery {
+        grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+        gap: 20px;
+      }
     }
   </style>
 </head>
@@ -147,41 +163,27 @@
       <button class="tab-button" onclick="showGallery('fotobox', this)">Fotobox</button>
     </div>
 
-    <!-- Galerieabschnitte -->
     <div id="hochzeit" class="gallery active">
       <img src="20230630_075314520_iOS.jpg" alt="Hochzeit 1">
       <img src="https://via.placeholder.com/800x600?text=Hochzeit+2" alt="Hochzeit 2">
       <img src="https://via.placeholder.com/800x600?text=Hochzeit+3" alt="Hochzeit 3">
       <img src="https://via.placeholder.com/800x600?text=Hochzeit+4" alt="Hochzeit 4">
-      <img src="https://via.placeholder.com/800x600?text=Hochzeit+5" alt="Hochzeit 5">
-      <img src="https://via.placeholder.com/800x600?text=Hochzeit+6" alt="Hochzeit 6">
     </div>
 
     <div id="geburtstag" class="gallery">
       <img src="https://via.placeholder.com/800x600?text=Geburtstag+1" alt="Geburtstag 1">
       <img src="https://via.placeholder.com/800x600?text=Geburtstag+2" alt="Geburtstag 2">
       <img src="https://via.placeholder.com/800x600?text=Geburtstag+3" alt="Geburtstag 3">
-      <img src="https://via.placeholder.com/800x600?text=Geburtstag+4" alt="Geburtstag 4">
-      <img src="https://via.placeholder.com/800x600?text=Geburtstag+5" alt="Geburtstag 5">
-      <img src="https://via.placeholder.com/800x600?text=Geburtstag+6" alt="Geburtstag 6">
     </div>
 
     <div id="events" class="gallery">
       <img src="https://via.placeholder.com/800x600?text=Event+1" alt="Event 1">
       <img src="https://via.placeholder.com/800x600?text=Event+2" alt="Event 2">
-      <img src="https://via.placeholder.com/800x600?text=Event+3" alt="Event 3">
-      <img src="https://via.placeholder.com/800x600?text=Event+4" alt="Event 4">
-      <img src="https://via.placeholder.com/800x600?text=Event+5" alt="Event 5">
-      <img src="https://via.placeholder.com/800x600?text=Event+6" alt="Event 6">
     </div>
 
     <div id="fotobox" class="gallery">
       <img src="https://via.placeholder.com/800x600?text=Fotobox+1" alt="Fotobox 1">
       <img src="https://via.placeholder.com/800x600?text=Fotobox+2" alt="Fotobox 2">
-      <img src="https://via.placeholder.com/800x600?text=Fotobox+3" alt="Fotobox 3">
-      <img src="https://via.placeholder.com/800x600?text=Fotobox+4" alt="Fotobox 4">
-      <img src="https://via.placeholder.com/800x600?text=Fotobox+5" alt="Fotobox 5">
-      <img src="https://via.placeholder.com/800x600?text=Fotobox+6" alt="Fotobox 6">
     </div>
 
     <div class="footer">
@@ -210,13 +212,12 @@
       btn.classList.add('active');
     }
 
-    // Lightbox öffnen
+    // Bilder-Klick: Lightbox öffnen
     document.querySelectorAll('.gallery img').forEach(img => {
       img.addEventListener('click', e => {
         const gallery = e.target.closest('.gallery');
         currentImages = Array.from(gallery.querySelectorAll('img'));
         currentIndex = currentImages.indexOf(e.target);
-
         openLightbox(currentImages[currentIndex].src);
       });
     });
@@ -244,6 +245,15 @@
       currentIndex = (currentIndex + 1) % currentImages.length;
       document.getElementById('lightbox-img').src = currentImages[currentIndex].src;
     }
+
+    // Tastatur-Navigation
+    window.addEventListener('keydown', e => {
+      const isOpen = document.getElementById('lightbox').classList.contains('active');
+      if (!isOpen) return;
+      if (e.key === 'ArrowRight') nextImage(e);
+      else if (e.key === 'ArrowLeft') prevImage(e);
+      else if (e.key === 'Escape') closeLightbox(e);
+    });
   </script>
 </body>
 </html>
