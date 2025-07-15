@@ -66,6 +66,7 @@
       box-shadow: 0 4px 8px rgba(0,0,0,0.1);
       transition: transform 0.3s ease;
       object-fit: cover;
+      cursor: pointer;
     }
     .gallery img:hover {
       transform: scale(1.03);
@@ -74,6 +75,60 @@
       margin-top: 40px;
       font-size: 14px;
       color: #777;
+    }
+
+    /* Lightbox Styles */
+    .lightbox {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100vw;
+      height: 100vh;
+      background: rgba(0,0,0,0.9);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 1000;
+      display: none;
+    }
+    .lightbox img {
+      max-width: 90%;
+      max-height: 90%;
+      border-radius: 12px;
+    }
+    .lightbox.active {
+      display: flex;
+    }
+    .lightbox-controls {
+      position: absolute;
+      top: 50%;
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      padding: 0 20px;
+      transform: translateY(-50%);
+    }
+    .lightbox-button {
+      background: rgba(255,255,255,0.2);
+      border: none;
+      color: white;
+      font-size: 2rem;
+      padding: 10px 20px;
+      cursor: pointer;
+      border-radius: 8px;
+      transition: background 0.3s;
+    }
+    .lightbox-button:hover {
+      background: rgba(255,255,255,0.4);
+    }
+    .lightbox-close {
+      position: absolute;
+      top: 20px;
+      right: 30px;
+      font-size: 2rem;
+      color: white;
+      cursor: pointer;
+      background: none;
+      border: none;
     }
   </style>
 </head>
@@ -86,46 +141,47 @@
     <h1>Fotogalerie</h1>
 
     <div class="tabs">
-      <button class="tab-button active" onclick="showGallery('hochzeit')">Hochzeit</button>
-      <button class="tab-button" onclick="showGallery('geburtstag')">Geburtstag</button>
-      <button class="tab-button" onclick="showGallery('events')">Weitere Events</button>
-      <button class="tab-button" onclick="showGallery('fotobox')">Fotobox</button>
+      <button class="tab-button active" onclick="showGallery('hochzeit', this)">Hochzeit</button>
+      <button class="tab-button" onclick="showGallery('geburtstag', this)">Geburtstag</button>
+      <button class="tab-button" onclick="showGallery('events', this)">Weitere Events</button>
+      <button class="tab-button" onclick="showGallery('fotobox', this)">Fotobox</button>
     </div>
 
+    <!-- Galerieabschnitte -->
     <div id="hochzeit" class="gallery active">
       <img src="20230630_075314520_iOS.jpg" alt="Hochzeit 1">
-      <img src="https://via.placeholder.com/300x200?text=Hochzeit+2" alt="Hochzeit 2">
-      <img src="https://via.placeholder.com/300x200?text=Hochzeit+3" alt="Hochzeit 3">
-      <img src="https://via.placeholder.com/300x200?text=Hochzeit+4" alt="Hochzeit 4">
-      <img src="https://via.placeholder.com/300x200?text=Hochzeit+5" alt="Hochzeit 5">
-      <img src="https://via.placeholder.com/300x200?text=Hochzeit+6" alt="Hochzeit 6">
+      <img src="https://via.placeholder.com/800x600?text=Hochzeit+2" alt="Hochzeit 2">
+      <img src="https://via.placeholder.com/800x600?text=Hochzeit+3" alt="Hochzeit 3">
+      <img src="https://via.placeholder.com/800x600?text=Hochzeit+4" alt="Hochzeit 4">
+      <img src="https://via.placeholder.com/800x600?text=Hochzeit+5" alt="Hochzeit 5">
+      <img src="https://via.placeholder.com/800x600?text=Hochzeit+6" alt="Hochzeit 6">
     </div>
 
     <div id="geburtstag" class="gallery">
-      <img src="https://via.placeholder.com/300x200?text=Geburtstag+1" alt="Geburtstag 1">
-      <img src="https://via.placeholder.com/300x200?text=Geburtstag+2" alt="Geburtstag 2">
-      <img src="https://via.placeholder.com/300x200?text=Geburtstag+3" alt="Geburtstag 3">
-      <img src="https://via.placeholder.com/300x200?text=Geburtstag+4" alt="Geburtstag 4">
-      <img src="https://via.placeholder.com/300x200?text=Geburtstag+5" alt="Geburtstag 5">
-      <img src="https://via.placeholder.com/300x200?text=Geburtstag+6" alt="Geburtstag 6">
+      <img src="https://via.placeholder.com/800x600?text=Geburtstag+1" alt="Geburtstag 1">
+      <img src="https://via.placeholder.com/800x600?text=Geburtstag+2" alt="Geburtstag 2">
+      <img src="https://via.placeholder.com/800x600?text=Geburtstag+3" alt="Geburtstag 3">
+      <img src="https://via.placeholder.com/800x600?text=Geburtstag+4" alt="Geburtstag 4">
+      <img src="https://via.placeholder.com/800x600?text=Geburtstag+5" alt="Geburtstag 5">
+      <img src="https://via.placeholder.com/800x600?text=Geburtstag+6" alt="Geburtstag 6">
     </div>
 
     <div id="events" class="gallery">
-      <img src="https://via.placeholder.com/300x200?text=Event+1" alt="Event 1">
-      <img src="https://via.placeholder.com/300x200?text=Event+2" alt="Event 2">
-      <img src="https://via.placeholder.com/300x200?text=Event+3" alt="Event 3">
-      <img src="https://via.placeholder.com/300x200?text=Event+4" alt="Event 4">
-      <img src="https://via.placeholder.com/300x200?text=Event+5" alt="Event 5">
-      <img src="https://via.placeholder.com/300x200?text=Event+6" alt="Event 6">
+      <img src="https://via.placeholder.com/800x600?text=Event+1" alt="Event 1">
+      <img src="https://via.placeholder.com/800x600?text=Event+2" alt="Event 2">
+      <img src="https://via.placeholder.com/800x600?text=Event+3" alt="Event 3">
+      <img src="https://via.placeholder.com/800x600?text=Event+4" alt="Event 4">
+      <img src="https://via.placeholder.com/800x600?text=Event+5" alt="Event 5">
+      <img src="https://via.placeholder.com/800x600?text=Event+6" alt="Event 6">
     </div>
 
     <div id="fotobox" class="gallery">
-      <img src="https://via.placeholder.com/300x200?text=Fotobox+1" alt="Fotobox 1">
-      <img src="https://via.placeholder.com/300x200?text=Fotobox+2" alt="Fotobox 2">
-      <img src="https://via.placeholder.com/300x200?text=Fotobox+3" alt="Fotobox 3">
-      <img src="https://via.placeholder.com/300x200?text=Fotobox+4" alt="Fotobox 4">
-      <img src="https://via.placeholder.com/300x200?text=Fotobox+5" alt="Fotobox 5">
-      <img src="https://via.placeholder.com/300x200?text=Fotobox+6" alt="Fotobox 6">
+      <img src="https://via.placeholder.com/800x600?text=Fotobox+1" alt="Fotobox 1">
+      <img src="https://via.placeholder.com/800x600?text=Fotobox+2" alt="Fotobox 2">
+      <img src="https://via.placeholder.com/800x600?text=Fotobox+3" alt="Fotobox 3">
+      <img src="https://via.placeholder.com/800x600?text=Fotobox+4" alt="Fotobox 4">
+      <img src="https://via.placeholder.com/800x600?text=Fotobox+5" alt="Fotobox 5">
+      <img src="https://via.placeholder.com/800x600?text=Fotobox+6" alt="Fotobox 6">
     </div>
 
     <div class="footer">
@@ -133,12 +189,60 @@
     </div>
   </div>
 
+  <!-- Lightbox -->
+  <div class="lightbox" id="lightbox" onclick="closeLightbox(event)">
+    <button class="lightbox-close" onclick="closeLightbox(event)">×</button>
+    <div class="lightbox-controls">
+      <button class="lightbox-button" onclick="prevImage(event)">‹</button>
+      <button class="lightbox-button" onclick="nextImage(event)">›</button>
+    </div>
+    <img id="lightbox-img" src="" alt="Vollbild">
+  </div>
+
   <script>
-    function showGallery(id) {
+    let currentImages = [];
+    let currentIndex = 0;
+
+    function showGallery(id, btn) {
       document.querySelectorAll('.gallery').forEach(g => g.classList.remove('active'));
       document.querySelectorAll('.tab-button').forEach(b => b.classList.remove('active'));
       document.getElementById(id).classList.add('active');
-      event.target.classList.add('active');
+      btn.classList.add('active');
+    }
+
+    // Lightbox öffnen
+    document.querySelectorAll('.gallery img').forEach(img => {
+      img.addEventListener('click', e => {
+        const gallery = e.target.closest('.gallery');
+        currentImages = Array.from(gallery.querySelectorAll('img'));
+        currentIndex = currentImages.indexOf(e.target);
+
+        openLightbox(currentImages[currentIndex].src);
+      });
+    });
+
+    function openLightbox(src) {
+      document.getElementById('lightbox-img').src = src;
+      document.getElementById('lightbox').classList.add('active');
+    }
+
+    function closeLightbox(e) {
+      if (e.target.id === 'lightbox' || e.target.classList.contains('lightbox-close')) {
+        document.getElementById('lightbox').classList.remove('active');
+        document.getElementById('lightbox-img').src = '';
+      }
+    }
+
+    function prevImage(e) {
+      e.stopPropagation();
+      currentIndex = (currentIndex - 1 + currentImages.length) % currentImages.length;
+      document.getElementById('lightbox-img').src = currentImages[currentIndex].src;
+    }
+
+    function nextImage(e) {
+      e.stopPropagation();
+      currentIndex = (currentIndex + 1) % currentImages.length;
+      document.getElementById('lightbox-img').src = currentImages[currentIndex].src;
     }
   </script>
 </body>
