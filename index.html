@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Fotogalerie – Steffen Veltrup</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: 'Inter', sans-serif;
+      background: #fff;
+      color: #111;
+    }
+    .top-gradient {
+      width: 100%;
+      height: 200px;
+      background: linear-gradient(to bottom, #000, #fff);
+      display: flex;
+      justify-content: center;
+      align-items: flex-end;
+      padding-bottom: 80px;
+    }
+    .container {
+      max-width: 960px;
+      margin: auto;
+      padding: 20px;
+      text-align: center;
+    }
+    h1 {
+      font-size: 24px;
+      font-weight: 600;
+      margin-bottom: 20px;
+    }
+    .tabs {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      margin-bottom: 20px;
+      flex-wrap: wrap;
+    }
+    .tab-button {
+      padding: 10px 20px;
+      border: none;
+      border-radius: 12px;
+      background: #f0f0f0;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+    .tab-button.active, .tab-button:hover {
+      background: #ddd;
+    }
+    .gallery {
+      display: none;
+      grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+      gap: 12px;
+    }
+    .gallery.active {
+      display: grid;
+    }
+    .gallery img {
+      width: 100%;
+      height: 160px;
+      border-radius: 12px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+      transition: transform 0.3s ease;
+      object-fit: cover;
+    }
+    .gallery img:hover {
+      transform: scale(1.03);
+    }
+    .footer {
+      margin-top: 40px;
+      font-size: 14px;
+      color: #777;
+    }
+  </style>
+</head>
+<body>
+  <div class="top-gradient">
+    <img src="logo-no-background-white.png" alt="Logo" class="logo" style="max-height: 50px;">
+  </div>
+
+  <div class="container">
+    <h1>Fotogalerie</h1>
+
+    <div class="tabs">
+      <button class="tab-button active" onclick="showGallery('hochzeit')">Hochzeit</button>
+      <button class="tab-button" onclick="showGallery('geburtstag')">Geburtstag</button>
+      <button class="tab-button" onclick="showGallery('events')">Weitere Events</button>
+      <button class="tab-button" onclick="showGallery('fotobox')">Fotobox</button>
+    </div>
+
+    <div id="hochzeit" class="gallery active">
+      <img src="https://via.placeholder.com/300x200?text=Hochzeit+1" alt="Hochzeit 1">
+      <img src="https://via.placeholder.com/300x200?text=Hochzeit+2" alt="Hochzeit 2">
+      <img src="https://via.placeholder.com/300x200?text=Hochzeit+3" alt="Hochzeit 3">
+      <img src="https://via.placeholder.com/300x200?text=Hochzeit+4" alt="Hochzeit 4">
+      <img src="https://via.placeholder.com/300x200?text=Hochzeit+5" alt="Hochzeit 5">
+      <img src="https://via.placeholder.com/300x200?text=Hochzeit+6" alt="Hochzeit 6">
+    </div>
+
+    <div id="geburtstag" class="gallery">
+      <img src="https://via.placeholder.com/300x200?text=Geburtstag+1" alt="Geburtstag 1">
+      <img src="https://via.placeholder.com/300x200?text=Geburtstag+2" alt="Geburtstag 2">
+      <img src="https://via.placeholder.com/300x200?text=Geburtstag+3" alt="Geburtstag 3">
+      <img src="https://via.placeholder.com/300x200?text=Geburtstag+4" alt="Geburtstag 4">
+      <img src="https://via.placeholder.com/300x200?text=Geburtstag+5" alt="Geburtstag 5">
+      <img src="https://via.placeholder.com/300x200?text=Geburtstag+6" alt="Geburtstag 6">
+    </div>
+
+    <div id="events" class="gallery">
+      <img src="https://via.placeholder.com/300x200?text=Event+1" alt="Event 1">
+      <img src="https://via.placeholder.com/300x200?text=Event+2" alt="Event 2">
+      <img src="https://via.placeholder.com/300x200?text=Event+3" alt="Event 3">
+      <img src="https://via.placeholder.com/300x200?text=Event+4" alt="Event 4">
+      <img src="https://via.placeholder.com/300x200?text=Event+5" alt="Event 5">
+      <img src="https://via.placeholder.com/300x200?text=Event+6" alt="Event 6">
+    </div>
+
+    <div id="fotobox" class="gallery">
+      <img src="https://via.placeholder.com/300x200?text=Fotobox+1" alt="Fotobox 1">
+      <img src="https://via.placeholder.com/300x200?text=Fotobox+2" alt="Fotobox 2">
+      <img src="https://via.placeholder.com/300x200?text=Fotobox+3" alt="Fotobox 3">
+      <img src="https://via.placeholder.com/300x200?text=Fotobox+4" alt="Fotobox 4">
+      <img src="https://via.placeholder.com/300x200?text=Fotobox+5" alt="Fotobox 5">
+      <img src="https://via.placeholder.com/300x200?text=Fotobox+6" alt="Fotobox 6">
+    </div>
+
+    <div class="footer">
+      © 2025 Steffen Veltrup – Fotografie & Fotoboxverleih
+    </div>
+  </div>
+
+  <script>
+    function showGallery(id) {
+      document.querySelectorAll('.gallery').forEach(g => g.classList.remove('active'));
+      document.querySelectorAll('.tab-button').forEach(b => b.classList.remove('active'));
+      document.getElementById(id).classList.add('active');
+      event.target.classList.add('active');
+    }
+  </script>
+</body>
+</html>
